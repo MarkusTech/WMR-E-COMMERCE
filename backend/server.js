@@ -3,13 +3,23 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import colors from "colors";
+
+// IMPORT DATABASE
+import connectDB from "../backend/config/db.js";
+
+// IMPORT API ROUTES
 
 // DOTENV CONFIG
 dotenv.config();
+colors;
 const port = process.env.PORT;
 
 // REST OBJ
 const app = express();
+
+// DATABASE
+connectDB();
 
 // MIDDLEWARES
 app.use(cors());
@@ -25,5 +35,5 @@ app.get("/", (req, res) => {
 // API ROUTES
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`.bgCyan);
 });
