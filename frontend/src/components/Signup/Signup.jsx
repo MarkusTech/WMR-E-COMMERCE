@@ -87,9 +87,9 @@ const Signup = () => {
               >
                 Password
               </label>
-              <div className="mt-1">
+              <div className="mt-1 relative">
                 <input
-                  type="password"
+                  type={visible ? "text" : "password"}
                   name="password"
                   autoComplete="current-password"
                   required
