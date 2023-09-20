@@ -1,39 +1,30 @@
-import express from "express";
-import cors from "cors";
-import morgan from "morgan";
+import app from "./app.js";
+import connectToDatabase from "./config/db.js";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
-import colors from "colors";
 
-// IMPORT DATABASE
-import connectDB from "../backend/config/db.js";
-
-// IMPORT API ROUTES
-
-// DOTENV CONFIG
-dotenv.config();
-colors;
-const port = process.env.PORT;
-
-// REST OBJ
-const app = express();
-
-// DATABASE
-connectDB();
-
-// MIDDLEWARES
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// GET REQUEST
-app.get("/", (req, res) => {
-  res.send("Wenn Mark Recopelacion");
+// Handling uncaught Exception
+process.on("uncaughtException", (err) => {
+  console.log(`Error: ${err.message}`);
+  console.log(`shutting down the server for handling uncaught exception`);
 });
 
-// API ROUTES
+// config
+dotenv.config();
+const port = process.env.PORT;
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`.bgCyan);
+// Connect to database
+connectToDatabase();
+
+const server = app.listen(port, () => {
+  console.log(`Sever is running on http://localhost:${port}`);
+});
+
+// unhandled promise rejection
+process.on("unhandledRejection", (err) => {
+  console.log(`Shutting down the server for ${err.message}`);
+  console.log(`shutting down the server for unhandle promise rejection`);
+
+  server.close(() => {
+    process.exit(1);
+  });
 });
