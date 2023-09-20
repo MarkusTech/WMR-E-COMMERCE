@@ -5,31 +5,31 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import colors from "colors";
+import errorHandler from "./middlewares/error.js";
 
 // dotenv config
 dotenv.config();
 colors;
 
-// REST OBJ
+// rest obj
 const app = express();
 
-// Middlewares
+// middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
-// Set the limit for the request body size to 50MB
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-
-// IMPORT API ROUTES
-
-// GET REQUEST
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
   res.send("Wenn Mark Recopelacion");
 });
+// set the limit for the request body size to 50MB
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
-// API ROUTES
+// import routes
 
-// ERROR HANDLING
+// api
+
+// it's for ErrorHandling
+app.use(errorHandler);
 
 export default app;
