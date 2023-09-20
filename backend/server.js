@@ -16,7 +16,7 @@ const port = process.env.PORT;
 connectToDatabase();
 
 const server = app.listen(port, () => {
-  console.log(`Sever is running on http://localhost:${port}`);
+  console.log(`Sever is running on http://localhost:${port}`.bgCyan);
 });
 
 // unhandled promise rejection

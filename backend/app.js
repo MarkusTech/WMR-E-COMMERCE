@@ -6,27 +6,20 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import colors from "colors";
 
-// DOTENV CONFIG
+// dotenv config
 dotenv.config();
 colors;
-const port = process.env.PORT;
 
 // REST OBJ
 const app = express();
 
-// MIDDLEWARES
+// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-
-// config
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config({
-    path: "config/.env",
-  });
-}
+// Set the limit for the request body size to 50MB
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // IMPORT API ROUTES
 
