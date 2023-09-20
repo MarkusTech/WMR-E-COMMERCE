@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import colors from "colors";
 import errorHandler from "./middlewares/error.js";
+import fileUpload from "express-fileupload";
 
 // dotenv config
 dotenv.config();
@@ -22,8 +23,10 @@ app.use(cookieParser());
 app.get("/test", (req, res) => {
   res.send("Wenn Mark Recopelacion");
 });
+app.use(fileUpload({ useTempFiles: true }));
+
 // set the limit for the request body size to 50MB
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 // import routes
 
