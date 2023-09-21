@@ -19,18 +19,17 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
+app.use("/", express.static("uploads"));
 app.get("/test", (req, res) => {
   res.send("Wenn Mark Recopelacion");
 });
-
-// set the limit for the request body size to 50MB
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 // import routes
 import userRoute from "./routes/userRoute.js";
 
 // api
-app.use("/api/v1", userRoute);
+app.use("/api/v1/user", userRoute);
 
 // it's for ErrorHandling
 app.use(errorHandler);

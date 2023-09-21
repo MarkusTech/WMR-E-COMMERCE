@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/user.js";
-import ErrorHandler from "../utils/ErrorHandler";
+import ErrorHandler from "../utils/ErrorHandler.js";
+import path from "path";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -10,6 +11,16 @@ const registerUser = asyncHandler(async (req, res) => {
     if (userEmail) {
       return next(new ErrorHandler("User already exists", 400));
     }
+
+    const filename = req.file.filename;
+    const fileUrl = path.join(filename);
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      avatar: fileUrl,
+    };
+    console.log(user);
   } catch (error) {
     throw new Error();
   }
