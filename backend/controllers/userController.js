@@ -14,21 +14,23 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
     const filename = req.file.filename;
     const fileUrl = path.join(filename);
+    const avatarUrl = {
+      public_id: filename,
+      url: fileUrl,
+    };
     const user = {
       name: name,
       email: email,
       password: password,
-      avatar: fileUrl,
+      avatar: avatarUrl,
     };
 
     const newUser = await User.create(user);
-    res.status(
-      (200).json({
-        success: true,
-        message: "User registed successfully",
-        newUser,
-      })
-    );
+    res.status(200).json({
+      success: true,
+      message: "User registered successfully",
+      newUser,
+    });
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
