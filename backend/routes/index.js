@@ -1,9 +1,4 @@
-import asyncHandler from "express-async-handler";
-import User from "../models/user.js";
-import ErrorHandler from "../utils/ErrorHandler.js";
-import path from "path";
-
-const registerUser = asyncHandler(async (req, res, next) => {
+router.post("/create-user", upload.single("file"), async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
     const userEmail = await User.findOne({ email });
@@ -33,7 +28,3 @@ const registerUser = asyncHandler(async (req, res, next) => {
     return next(new ErrorHandler(error.message, 500));
   }
 });
-
-// 2:29.48
-
-export { registerUser };
