@@ -4,6 +4,7 @@ import ErrorHandler from "../utils/ErrorHandler.js";
 import path from "path";
 import fs from "fs";
 import jwt from "jsonwebtoken";
+import sendMail from "../utils/sendMail.js";
 
 const registerUser = asyncHandler(async (req, res, next) => {
   try {
@@ -50,6 +51,11 @@ const registerUser = asyncHandler(async (req, res, next) => {
     const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
     try {
+      await sendMail({
+        email: user.email,
+        subject: "Activate your account",
+        message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
+      });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
