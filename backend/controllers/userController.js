@@ -50,11 +50,16 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
     const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
+    // send activation email via nodemailer
     try {
       await sendMail({
         email: user.email,
         subject: "Activate your account",
         message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
+      });
+      res.status(201).json({
+        success: true,
+        message: `Please check your email:- ${user.email}  to activate your account`,
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
