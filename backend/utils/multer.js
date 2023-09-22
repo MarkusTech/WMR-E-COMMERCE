@@ -12,3 +12,5 @@ const storage = multer.diskStorage({
 });
 
 export const upload = multer({ storage: storage });
+
+// the multer i use is in userRoutes!
