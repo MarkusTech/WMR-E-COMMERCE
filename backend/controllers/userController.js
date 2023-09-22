@@ -71,11 +71,18 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
 // create activation token
 const createActivationToken = (user) => {
-  return jwt.sign(user, process.env.ACTIVATION_SECRET, {
-    expiresIn: "5m",
-  });
+  try {
+    const token = jwt.sign(user, process.env.ACTIVATION_SECRET, {
+      expiresIn: "5m",
+    });
+    return token;
+  } catch (error) {
+    console.error("Error creating activation token:", error);
+    throw error; // Rethrow the error to be handled further up the call stack.
+  }
 };
 
-// active user
+// activate user
+// 2:51:58
 
 export { registerUser };
