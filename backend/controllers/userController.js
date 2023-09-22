@@ -83,6 +83,6 @@ const createActivationToken = (user) => {
 };
 
 // activate user
-// 2:51:58
+// 2:54
 
 export { registerUser };
