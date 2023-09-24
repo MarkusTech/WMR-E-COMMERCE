@@ -3,3 +3,4 @@
 //force install > npm i react-lottie -force
 
 registratiom done!
+nodemailer done
