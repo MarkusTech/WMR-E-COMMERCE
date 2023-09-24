@@ -4,3 +4,4 @@
 
 registratiom done!
 nodemailer done
+stripe and cloudinary next
