@@ -6,6 +6,7 @@ import path from "path";
 import fs from "fs";
 import jwt from "jsonwebtoken";
 import sendMail from "../utils/sendMail.js";
+import sendToken from "../utils/jwtToken.js";
 
 const registerUser = asyncHandler(async (req, res, next) => {
   try {
