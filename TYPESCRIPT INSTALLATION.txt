@@ -1,0 +1,17 @@
+TYPESCRIPT INSTALLATION
+> npm install -g typescript
+> npm install -g ts-node
+> npm install -g nodemon
+
+---------------------------------
+package.json  -> npm init --y
+tsconfig.json  -> npx tsc --init
+
+> npm install @types/node
+
+--------------------------------
+how to run a ts program
+1. tsc app.ts node app.js
+2. ts-node app.ts
+3. nodemon app.ts (server)
+4. npm start
