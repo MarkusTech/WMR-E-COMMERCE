@@ -119,4 +119,6 @@ const activateUser = catchAsyncErrors(
   })
 );
 
+// 304
+
 export { registerUser, activateUser };
