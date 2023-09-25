@@ -4,6 +4,4 @@
 
 registratiom done!
 nodemailer done
-stripe and cloudinary next
-remove multer later
-and use multer-s3
+Acticvation of account            25-09-2023
