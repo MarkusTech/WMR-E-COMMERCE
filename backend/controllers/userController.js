@@ -83,6 +83,8 @@ const createActivationToken = (user) => {
 };
 
 // activate user
-// 2:54
+const activateUser = asyncHandler(async (req, res) => {
+  res.send("hello");
+});
 
-export { registerUser };
+export { registerUser, activateUser };

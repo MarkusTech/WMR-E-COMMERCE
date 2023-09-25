@@ -1,3 +1,5 @@
-export const asyncMiddleware = (theFunc) => (req, res, next) => {
+const asyncMiddleware = (theFunc) => (req, res, next) => {
   Promise.resolve(theFunc(req, res, next)).catch(next);
 };
+
+export default asyncMiddleware;
