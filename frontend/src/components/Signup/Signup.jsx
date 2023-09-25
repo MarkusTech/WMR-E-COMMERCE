@@ -33,6 +33,7 @@ const Signup = () => {
     axios
       .post(`${server}/user/register`, newForm, config)
       .then((res) => {
+        // instead of toas i will use sweetalert2 later!
         toast.success(res.data.message);
         setName("");
         setEmail("");
