@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/user.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
+import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import path from "path";
 import fs from "fs";
 import jwt from "jsonwebtoken";
@@ -83,8 +84,38 @@ const createActivationToken = (user) => {
 };
 
 // activate user
-const activateUser = asyncHandler(async (req, res) => {
-  res.send("hello");
-});
+const activateUser = catchAsyncErrors(
+  asyncHandler(async (req, res, next) => {
+    try {
+      const { activation_token } = req.body;
+
+      const newUser = jwt.verify(
+        activation_token,
+        process.env.ACTIVATION_SECRET
+      );
+
+      if (!newUser) {
+        return next(new ErrorHandler("Invalid Token", 400));
+      }
+      const { name, email, password, avatar } = newUser;
+
+      let user = await User.findOne({ email });
+
+      if (user) {
+        return next(new ErrorHandler("User already exist", 400));
+      }
+      user = await User.create({
+        name,
+        email,
+        avatar,
+        password,
+      });
+
+      sendToken(user, 201, res);
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
 
 export { registerUser, activateUser };

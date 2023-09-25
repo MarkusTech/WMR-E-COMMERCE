@@ -1,6 +1,5 @@
 import express from "express";
 import multer from "multer";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import { registerUser, activateUser } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -21,6 +20,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/register", upload.single("file"), registerUser);
-router.post("/activation", catchAsyncErrors, activateUser);
+router.post("/activation", activateUser);
 
 export default router;
