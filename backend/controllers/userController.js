@@ -119,6 +119,17 @@ const activateUser = catchAsyncErrors(
   })
 );
 
+// login user
+const loginUser = catchAsyncErrors(
+  asyncHandler(async (req, res) => {
+    try {
+      const { email, password } = req.body;
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
 // 304
 
 export { registerUser, activateUser };
