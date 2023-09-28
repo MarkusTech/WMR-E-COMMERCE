@@ -5,7 +5,6 @@
 registratiom done!
 nodemailer done
 Acticvation of account            25-09-2023
-user profile
 edit profile
 view profile
 delete profile
