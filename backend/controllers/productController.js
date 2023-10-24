@@ -52,12 +52,38 @@ const getProduct = asyncHandler(async (req, res, next) => {
   }
 });
 
-const updateProduct = asyncHandler(async (req, res) => {
-  res.send("Update Product");
+const updateProduct = asyncHandler(async (req, res, next) => {
+  const { productName, description, quantity, price } = req.body;
+  const { id } = req.params;
+  try {
+    const product = await productModel.findByIdAndUpdate(
+      id,
+      { productName, description, quantity, price },
+      { new: true }
+    );
+    res.status(200).json({
+      success: true,
+      message: "Product Successfully Updated!",
+      product,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error));
+  }
 });
 
-const deleteProduct = asyncHandler(async (req, res) => {
-  res.send("Delete product");
+const deleteProduct = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const product = await productModel.findByIdAndDelete({ id });
+    res.status(200).json({
+      success: true,
+      message: "Product Deleted Successfully",
+      product,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error));
+  }
 });
 
 export { createProduct, getProducts, getProduct, updateProduct, deleteProduct };
