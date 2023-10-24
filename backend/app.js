@@ -31,7 +31,7 @@ import productRoutes from "./routes/productRoutes.js";
 
 // api
 app.use("/api/v1/user", userRoute);
-app.use("/api/v1/", productRoutes);
+app.use("/api/v1/product", productRoutes);
 
 // it's for ErrorHandling
 app.use(errorHandler);
