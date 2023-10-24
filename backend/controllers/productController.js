@@ -24,13 +24,32 @@ const createProduct = asyncHandler(async (req, res, next) => {
 });
 
 // GET ALL PRODUCT
-const getProducts = asyncHandler(async (req, res) => {
-  res.send("Get All products");
+const getProducts = asyncHandler(async (req, res, next) => {
+  try {
+    const products = await productModel.find();
+    res.status(200).json({
+      success: true,
+      message: "Products Fetch Successfully!",
+      products,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error));
+  }
 });
 
 // GET QUERY PRODUCT
-const getProduct = asyncHandler(async (req, res) => {
-  res.send("Get Single Data queried");
+const getProduct = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const product = await productModel.findById({ id });
+    res.status(200).json({
+      success: true,
+      message: "Product Found",
+      product,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error));
+  }
 });
 
 const updateProduct = asyncHandler(async (req, res) => {
