@@ -6,8 +6,8 @@ const createProduct = asyncHandler(async (req, res) => {
 });
 
 // GET ALL PRODUCT
-const getAllProdducts = asyncHandler(async (req, res) => {
-  res.send("Get all data in database");
+const getProducts = asyncHandler(async (req, res) => {
+  res.send("Get All products");
 });
 
 // GET QUERY PRODUCT
@@ -23,10 +23,4 @@ const deleteProduct = asyncHandler(async (req, res) => {
   res.send("Delete product");
 });
 
-export {
-  createProduct,
-  getAllProdducts,
-  getProduct,
-  updateProduct,
-  deleteProduct,
-};
+export { createProduct, getProducts, getProduct, updateProduct, deleteProduct };

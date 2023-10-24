@@ -27,9 +27,11 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 // import routes
 import userRoute from "./routes/userRoute.js";
+import productRoutes from "./routes/productRoutes.js";
 
 // api
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/", productRoutes);
 
 // it's for ErrorHandling
 app.use(errorHandler);
