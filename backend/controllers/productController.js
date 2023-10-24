@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import ErrorHandler from "../utils/ErrorHandler.js";
+// import ErrorHandler from "../utils/ErrorHandler.js";
 import productModel from "../models/product.js";
 
 // create product
@@ -19,12 +19,13 @@ const createProduct = asyncHandler(async (req, res, next) => {
       product,
     });
   } catch (error) {
-    return next(new ErrorHandler(error.message, 500));
+    console.log(error);
+    // return next(new ErrorHandler(error));
   }
 });
 
 // GET ALL PRODUCT
-const getProducts = asyncHandler(async (req, res, next) => {
+const getProducts = asyncHandler(async (req, res) => {
   try {
     const products = await productModel.find();
     res.status(200).json({
@@ -33,12 +34,13 @@ const getProducts = asyncHandler(async (req, res, next) => {
       products,
     });
   } catch (error) {
-    return next(new ErrorHandler(error));
+    console.log(error);
+    // return next(new ErrorHandler(error));
   }
 });
 
 // GET QUERY PRODUCT
-const getProduct = asyncHandler(async (req, res, next) => {
+const getProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
     const product = await productModel.findById({ id });
@@ -48,7 +50,8 @@ const getProduct = asyncHandler(async (req, res, next) => {
       product,
     });
   } catch (error) {
-    return next(new ErrorHandler(error));
+    console.log(error);
+    // return next(new ErrorHandler(error));
   }
 });
 
@@ -67,7 +70,8 @@ const updateProduct = asyncHandler(async (req, res, next) => {
       product,
     });
   } catch (error) {
-    return next(new ErrorHandler(error));
+    console.log(error);
+    // return next(new ErrorHandler(error));
   }
 });
 
@@ -82,7 +86,8 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
       product,
     });
   } catch (error) {
-    return next(new ErrorHandler(error));
+    console.log(error);
+    // return next(new ErrorHandler(error));
   }
 });
 
