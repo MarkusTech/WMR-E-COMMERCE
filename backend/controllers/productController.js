@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import ErrorHandler from "../utils/ErrorHandler.js";
+import ErrorHandler from "../utils/ErrorHandler";
 import productModel from "../models/product.js";
 
 // create product
