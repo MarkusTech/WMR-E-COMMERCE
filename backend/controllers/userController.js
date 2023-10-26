@@ -121,9 +121,30 @@ const activateUser = catchAsyncErrors(
 
 // login user
 const loginUser = catchAsyncErrors(
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     try {
       const { email, password } = req.body;
+      if (!email || !password) {
+        return next(
+          new ErrorHandler("Please provide a valid email or password", 400)
+        );
+      }
+
+      const user = await User.findOne({ email }).select("+password");
+
+      if (!user) {
+        return next(new ErrorHandler("User doesn't exists!", 400));
+      }
+
+      const isPasswordValid = await User.comparePassword(password);
+
+      if (!isPasswordValid) {
+        return next(
+          new ErrorHandler("Please provide correct information!", 400)
+        );
+      }
+
+      sendToken(user, 201, res);
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
