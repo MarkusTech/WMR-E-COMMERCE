@@ -150,6 +150,6 @@ const loginUser = catchAsyncErrors(
   })
 );
 
-// 304!
+// load user
 
 export { registerUser, activateUser, loginUser };
