@@ -6,6 +6,7 @@
   > Docker
   > ES7+ React/Redux/React-Native snippers
 - dsznajder
+
   > ESLint
   > GitLens
   > Javascript (ES6) Snippets for CLG
@@ -15,3 +16,5 @@
   > Tailwind CSS IntelliSense
   > tsx
   > Blackbox
+
+  3:37:46
