@@ -124,10 +124,9 @@ const loginUser = catchAsyncErrors(
   asyncHandler(async (req, res, next) => {
     try {
       const { email, password } = req.body;
+
       if (!email || !password) {
-        return next(
-          new ErrorHandler("Please provide a valid email or password", 400)
-        );
+        return next(new ErrorHandler("Please provide the all fields!", 400));
       }
 
       const user = await User.findOne({ email }).select("+password");
@@ -136,11 +135,11 @@ const loginUser = catchAsyncErrors(
         return next(new ErrorHandler("User doesn't exists!", 400));
       }
 
-      const isPasswordValid = await User.comparePassword(password);
+      const isPasswordValid = await user.comparePassword(password);
 
       if (!isPasswordValid) {
         return next(
-          new ErrorHandler("Please provide correct information!", 400)
+          new ErrorHandler("Please provide the correct information", 400)
         );
       }
 
