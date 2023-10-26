@@ -14,8 +14,13 @@ colors;
 // rest obj
 const app = express();
 
+const corsOptions = {
+  origin: "http://localhost:3000", // Replace with the actual client origin
+  credentials: true, // Allow cookies and other credentials
+};
+
 // middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
