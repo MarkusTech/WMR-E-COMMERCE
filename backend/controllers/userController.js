@@ -132,4 +132,4 @@ const loginUser = catchAsyncErrors(
 
 // 304!
 
-export { registerUser, activateUser };
+export { registerUser, activateUser, loginUser };
