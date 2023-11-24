@@ -1,39 +1,37 @@
 import { React, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { RxAvatar } from "react-icons/rx";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
+import { RxAvatar } from "react-icons/rx";
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
-const Signup = () => {
-  const [name, setName] = useState("");
+const Singup = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
 
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    setAvatar(file);
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
-    const newForm = new FormData();
-
-    newForm.append("file", avatar);
-    newForm.append("name", name);
-    newForm.append("email", email);
-    newForm.append("password", password);
-
     axios
-      .post(`${server}/user/register`, newForm, config)
+      .post(`${server}/user/create-user`, { name, email, password, avatar })
       .then((res) => {
-        // instead of toast i will use sweetalert2 later!
         toast.success(res.data.message);
         setName("");
         setEmail("");
@@ -55,10 +53,9 @@ const Signup = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* ---------------------------- FULL NAME --------------------------- */}
             <div>
               <label
-                htmlFor="name"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
                 Full Name
@@ -75,14 +72,13 @@ const Signup = () => {
                 />
               </div>
             </div>
-            {/* ---------------------------- END FULL NAME --------------------------- */}
-            {/* ---------------------------- EMAIL --------------------------- */}
+
             <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email Address
+                Email address
               </label>
               <div className="mt-1">
                 <input
@@ -96,8 +92,7 @@ const Signup = () => {
                 />
               </div>
             </div>
-            {/* ---------------------------- END EMAIL --------------------------- */}
-            {/* ---------------------------- FULL NAME --------------------------- */}
+
             <div>
               <label
                 htmlFor="password"
@@ -130,8 +125,7 @@ const Signup = () => {
                 )}
               </div>
             </div>
-            {/* ---------------------------- END FULL NAME --------------------------- */}
-            {/* ---------------------------- AVATAR --------------------------- */}
+
             <div>
               <label
                 htmlFor="avatar"
@@ -165,8 +159,7 @@ const Signup = () => {
                 </label>
               </div>
             </div>
-            {/* ---------------------------- END AVATAR --------------------------- */}
-            {/* ---------------------------- SUBMIT BUTTON --------------------------- */}
+
             <div>
               <button
                 type="submit"
@@ -175,15 +168,12 @@ const Signup = () => {
                 Submit
               </button>
             </div>
-            {/* ---------------------------- END SUBMIT BUTTON --------------------------- */}
-            {/* ---------------------------- SIGN IN --------------------------- */}
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>Already have an account?</h4>
               <Link to="/login" className="text-blue-600 pl-2">
                 Sign In
               </Link>
             </div>
-            {/* ---------------------------- END SIGN IN --------------------------- */}
           </form>
         </div>
       </div>
@@ -191,4 +181,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Singup;

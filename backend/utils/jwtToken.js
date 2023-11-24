@@ -17,4 +17,4 @@ const sendToken = (user, statusCode, res) => {
   });
 };
 
-export default sendToken;
+module.exports = sendToken;

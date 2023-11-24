@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     fontFamily: {
       Roboto: ["Roboto", "sans-serif"],
-      Poppins: ["Poppins", "sams-serif"],
+      Poppins: ['Poppins', "sans-serif"],
     },
     extend: {
       screens: {
@@ -13,7 +13,7 @@ module.exports = {
         "1100px": "1110px",
         "800px": "800px",
         "1300px": "1300px",
-        "400px": "400px",
+        "400px":"400px"
       },
     },
   },
